@@ -1,11 +1,5 @@
 [![Build status](https://ci.appveyor.com/api/projects/status/wdl2as68pflfxe66?svg=true)](https://ci.appveyor.com/project/vapanov/ahj-goblin-game)
-
-Правила сдачи задания:
-
-1. **Важно**: в рамках этого ДЗ нужно использовать менеджер пакетов yarn (а значит, никакого `package-lock.json` в репозитории быть не должно)
-1. **Важно**: всё должно собираться через Webpack (включая картинки и стили) и выкладываться на Github Pages через Appveyor.
-1. В README.md должен быть размещён бейджик сборки и ссылка на Github Pages
-1. В качестве результата присылайте проверяющему ссылки на ваши GitHub-проекты
+https://vapanov.github.io/ahj-goblin_game/
 
 ---
 
