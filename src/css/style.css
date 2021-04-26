@@ -178,6 +178,11 @@ body {
   border-radius: 4px;
   text-align: center;
 }
+.start {
+  color: #42a958;
+  background-color: #e1f2de;
+  border-color: #d1ebcc;
+}
 .failure {
   color: #a94442;
   background-color: #f2dede;

@@ -25,6 +25,12 @@ export default class GamePlay {
     return document.getElementById(`hole${index}`);
   }
 
+  addGoblinListener() {
+    this.goblin.addEventListener('click', (event) => {
+      this.whackGoblin(event.target.closest('.hole'));
+    });
+  }
+
   addNewGameListener() {
     document.querySelector('.btn').addEventListener(
       'click',
@@ -36,30 +42,13 @@ export default class GamePlay {
     );
   }
 
-  moveGoblin(index) {
-    GamePlay.getHole(index).append(this.goblin);
-    this.missCount += 1;
-    if (this.missCount > 5) {
-      this.endGame();
-    }
-    this.lost.textContent = this.missCount;
-  }
+  async startGame() {
+    const start = document.querySelector('.start');
+    start.classList.remove('visually-hidden');
+    await fadeOut(start);
+    start.classList.add('visually-hidden');
+    start.style.opacity = 1;
 
-  addGoblinListener() {
-    this.goblin.addEventListener('click', (event) => {
-      this.whackGoblin(event.target.closest('.hole'));
-    });
-  }
-
-  whackGoblin(point) {
-    this.goblin.remove();
-    point.classList.add('bloody');
-    this.whackedCount += 1;
-    this.missCount = 0 ? (this.missCount = 0) : (this.missCount -= 1);
-    this.whacked.textContent = this.whackedCount;
-  }
-
-  startGame() {
     this.missCount = -1;
     this.timerId = setInterval(() => {
       let newHole = this.board.activeHole;
@@ -67,23 +56,43 @@ export default class GamePlay {
         newHole = Math.floor(Math.random() * this.board.holeArray.length);
       }
       this.board.activeHole = newHole;
-
-      this.moveGoblin(this.board.activeHole);
+      this.counter(this.goblin);
+      // eslint-disable-next-line no-unused-expressions
+      this.missCount === 5 ? this.endGame() : this.moveGoblin(this.board.activeHole);
     }, 1000);
   }
 
-  async endGame() {
-    this.missCount = 5;
-    this.lost.textContent = this.missCount;
-    this.goblin.remove();
-    const target = document.querySelector('.alert-box');
-    target.classList.remove('visually-hidden');
-    await fadeOut(target).then(() => {
-      target.style.opacity = 1;
-      target.classList.add('visually-hidden');
-    });
+  moveGoblin(index) {
+    GamePlay.getHole(index).append(this.goblin);
+    this.goblin.removeAttribute('id');
+  }
 
+  whackGoblin(point) {
+    this.goblin.remove();
+    this.goblin.setAttribute('id', 'whacked');
+    point.classList.add('bloody');
+  }
+
+  counter(target) {
+    if (target.id === 'whacked') {
+      this.whackedCount += 1;
+      this.whacked.textContent = this.whackedCount;
+    } else {
+      this.missCount += 1;
+      this.lost.textContent = this.missCount;
+    }
+  }
+
+  async endGame() {
+    this.goblin.remove();
     clearInterval(this.timerId);
+
+    const failure = document.querySelector('.failure');
+    failure.classList.remove('visually-hidden');
+    await fadeOut(failure);
+    failure.classList.add('visually-hidden');
+    failure.style.opacity = 1;
+
     document.querySelector('.btn').classList.remove('visually-hidden');
   }
 

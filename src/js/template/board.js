@@ -20,6 +20,7 @@ export default class Board {
         <button data-id="action-restart" class="btn visually-hidden">NEW GAME</button>
       </div>
     </div>
+    <div class="alert-box start visually-hidden">WHACK THEM ALL!</div>
     <div class="alert-box failure visually-hidden">GOBLINS WIN! YOU LOOSE!</div>`;
 
     this.holeArray = [];
