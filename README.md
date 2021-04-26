@@ -1,5 +1,6 @@
 [![Build status](https://ci.appveyor.com/api/projects/status/wdl2as68pflfxe66?svg=true)](https://ci.appveyor.com/project/vapanov/ahj-goblin-game)
-https://vapanov.github.io/ahj-goblin_game/
+
+WHACK THEM ALL: https://vapanov.github.io/ahj-goblin_game/
 
 ---
 
